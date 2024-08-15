@@ -1,5 +1,6 @@
 import NextAuth from "next-auth"
 import Credentials from "next-auth/providers/credentials"
+import { createUserModel } from "./lib/mongodb/mongodb"
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
@@ -17,20 +18,19 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         },
       },
       authorize: async (credentials) => {
-        if (
-          !(credentials.username === "demo" && credentials.password === "demo")
-        ) {
+        const User = await createUserModel()
+        const user = await User.findOne({ username: credentials.username })
+        if (user?.comparePassword(credentials.password)) {
+          return { id: user.id, name: user.username }
+        } else {
           return null
-        }
-
-        return {
-          id: 1,
-          name: "Demo User",
-          image: "https://www.gravatar.com/avatar/",
         }
       },
     }),
   ],
+  session: {
+    strategy: "jwt",
+  },
   theme: {
     colorScheme: "light",
   },
