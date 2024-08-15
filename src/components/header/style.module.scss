@@ -1,0 +1,50 @@
+// Button icon for navigation menu
+.button {
+  position: fixed;
+  left: 0;
+  margin: 20px;
+  width: 80px;
+  height: 80px;
+  background-color: lightblue;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  z-index: 2;
+
+  // Burger icon within button
+  .burger {
+    width: 100%;
+    &::after,
+    &::before {
+      content: "";
+      display: block;
+      width: 40%;
+      background-color: black;
+      height: 3px;
+      margin: auto;
+      position: relative;
+      transition: 0.3s;
+    }
+    &::after {
+      top: -5px;
+    }
+    &::before {
+      top: 5px;
+    }
+  }
+
+  // Burger icon animation
+  .burgerActive {
+    &::after {
+      top: -1px;
+      transform: rotate(45deg);
+    }
+    &::before {
+      top: 1.5px;
+      transform: rotate(-45deg);
+    }
+  }
+}
