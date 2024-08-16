@@ -1,5 +1,6 @@
 "use client"
 
+import PropTypes from "prop-types"
 import Blockies from "react-blockies"
 import styles from "./auth.module.scss"
 
