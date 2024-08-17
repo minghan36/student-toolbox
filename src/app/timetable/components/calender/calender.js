@@ -15,6 +15,7 @@ export default function Calendar() {
   const [events, setEvents] = useState([]); // State to store the list of calendar events.
   const [selectedInfo, setSelectedInfo] = useState(null); // State to store the information about the date selected for event creation.
   const [selectedEvent, setSelectedEvent] = useState(null); // State to store the currently selected event for deletion.
+  const [backgroundImage, setBackgroundImage] = useState(null);
 
   // Effect hook to fetch events from an API when the component is first rendered.
   useEffect(() => {
@@ -48,8 +49,46 @@ export default function Calendar() {
     }
   };
 
+  const handleBackgroundImageUpload = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+            setBackgroundImage(reader.result);
+            document.body.style.backgroundImage = `url(${reader.result})`;
+            document.body.style.backgroundSize = 'cover';
+            document.body.style.backgroundRepeat = 'no-repeat';
+        };
+        reader.readAsDataURL(file);
+    }
+  };
+
+  const handleRemoveBackgroundImage = () => {
+    setBackgroundImage(null); // Clear the backgroundImage state
+    document.body.style.backgroundImage = ''; // Remove the background image
+  };
+
   return (
     <div className={styles.calendar_main}>
+      <div className={styles.buttonGroup}>
+          <input
+              type="file"
+              accept="image/*"
+              onChange={handleBackgroundImageUpload}
+              style={{ display: 'none' }}
+              id="backgroundImageUpload"
+          />
+          <label htmlFor="backgroundImageUpload" className={styles.uploadButton}>
+              Upload Background Image
+          </label>
+
+          {backgroundImage && (
+              <button onClick={handleRemoveBackgroundImage} className={styles.removeButton}>
+                  &times;
+              </button>
+          )}
+      </div>
+      
       <FullCalendar
         plugins={[timeGridPlugin, interactionPlugin]} // Loading plugins for the calendar (e.g., time grid view, interaction).
         initialView="timeGridWeek" // Setting the default view to a weekly time grid.
