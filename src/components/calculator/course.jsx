@@ -14,7 +14,7 @@ import Assignment from "./assignment";
  * - `totalAchieved` (Number): The total percentage achieved for the course.
  * - `averageAchieved` (Number): The average percentage achieved for the course.
  * - `courseGrade` (String): The grade of the course, default is "NA".
- * - `assignments` (Array): Array of assignment objects associated with the course.
+ * - `assignments` (Array): Array of assignment objects associated with the course. Each assignment contains an 'id' field.
  * @param {*} props 
  * @returns 
  */
@@ -34,7 +34,13 @@ export default function Course(props) {
   };
 
   const handleAssignmentDelete = (id) => {
-    setAssignments(assignments.filter((assignment) => assignment.id !== id));
+    const updatedAssignments = assignments.filter(
+      (assignment) => assignment.id !== id
+    );
+    setAssignments(updatedAssignments);
+    calculateTotalPercent(updatedAssignments);
+    calculateAveragePercent(updatedAssignments);
+    
   };
 
   const handleCourseClick = () => {
@@ -128,25 +134,22 @@ export default function Course(props) {
         averageAcheived={averageAcheived}
         courseGrade={courseGrade}
       ></CourseHeader>
-
-      {showAssignments && (
-        <div className="courseAssignments">
-          {assignments.map((assignment) => (
-            <Assignment
-              key={assignment.id}
-              id={assignment.id}
-              name={assignment.name}
-              grade={assignment.grade}
-              weight={assignment.weight}
-              onDelete={handleAssignmentDelete}
-              onUpdate={handleAssignmentUpdate}
-            />
-          ))}
-          <button className="newAssignmentBtn" onClick={handleNewAssignment}>
-            New Assignment +
-          </button>
-        </div>
-      )}
+      <div className={showAssignments ? "courseAssignmentsShow" : "courseAssignmentsHide"}>
+        {assignments.map((assignment) => (
+          <Assignment
+            key={assignment.id}
+            id={assignment.id}
+            name={assignment.name}
+            grade={assignment.grade}
+            weight={assignment.weight}
+            onDelete={handleAssignmentDelete}
+            onUpdate={handleAssignmentUpdate}
+          />
+        ))}
+        <button onClick={handleNewAssignment}>
+          New Assignment +
+        </button>
+      </div>
     </div>
   );
 }

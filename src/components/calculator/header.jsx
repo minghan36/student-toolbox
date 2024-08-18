@@ -5,9 +5,13 @@ export default function CalculatorHeader(props) {
       <div className="header">
         <h1>Grade Calculator</h1>
         <div className="createCourse">
-          <input
+          <input id="courseInput"
             placeholder="Enter Course Name"
             onChange={props.onNewCourseInput}
+            onKeyDown={(e) => {
+              if (!props.input && (e.key === "Enter"))
+                props.onNewCourse();
+            }}
           ></input>
           <button disabled={props.input} onClick={props.onNewCourse}>
             +

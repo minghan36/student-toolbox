@@ -17,6 +17,9 @@ export default function Assignment(props) {
         return editor === field ? (
             <input
                 defaultValue={field === "name" ? name : potentialField}
+                onKeyDown={(e) => {
+                    if (e.key === "Enter") e.target.blur();
+                }}
                 onBlur={(e) => handleBlur(field, e.target.value)}
                 autoFocus
             />
