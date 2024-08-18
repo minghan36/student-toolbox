@@ -46,7 +46,7 @@ export default function CalculatorPage() {
   };
 
   /**
-   * Listens for changes made to the 'courses' aray so that 'gpa' can be set accordingly.
+   * Listens for changes made to the 'courses' array so that 'gpa' can be set accordingly.
    *
    */
   useEffect(() => {

@@ -1,5 +1,6 @@
 import bcryptjs from "bcryptjs";
 import mongoose from "mongoose";
+import { number } from "prop-types";
 
 const connections = {};
 
@@ -28,6 +29,24 @@ const userSchema = new mongoose.Schema(
         end: { type: Date, required: true },
         backgroundColor: { type: String, default: "#3788d8" },
         borderColor: { type: String, default: "#3788d8" },
+      },
+    ],
+    courses: [
+      {
+        courseName: String,
+        courseID: Number,
+        courseGradePoint: Number,
+        totalAchieved: Number,
+        averageAchieved: Number,
+        courseGrade: String,
+        assignments: [
+          {
+            assignmentID: Number,
+            assignmentName: String,
+            grade: Number,
+            weight: Number,
+          },
+        ],
       },
     ],
   },
