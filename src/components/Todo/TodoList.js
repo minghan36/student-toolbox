@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import TodoListItem from "./TodoListItem";
 import PropTypes from "prop-types";
+import "./css/TodoList.css";
 
 export default function TodoList({ items }) {
     TodoList.propTypes = {
@@ -23,10 +24,10 @@ export default function TodoList({ items }) {
     };
 
     return (
-        <ul>
+        <div className="todo-list">
             {todoItems.map((item) => (
                 <TodoListItem key={item.id} item={item} onToggle={handleToggle} />
             ))}
-        </ul>
+        </div>
     );
 }

@@ -1,0 +1,21 @@
+body {
+    font-family: 'Poppins', sans-serif, 'Verdana', 'Arial';
+}
+
+button {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+    transition: all 0.3s;
+
+    font-family: inherit;
+    font-weight: 500;
+}
+
+button:hover {
+    cursor: pointer;
+    scale: 1.05;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}

@@ -1,0 +1,9 @@
+body {
+    background-color: #E5ECED;
+}
+
+#todo-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

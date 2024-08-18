@@ -1,12 +1,11 @@
 "use client";
 
-import React from "react"
-import { useState } from "react"
+import { React, useState } from "react"
 import Title from "@/components/title"
 import TodoList from "@/components/Todo/TodoList"
 import TodoCreateButton from "@/components/Todo/TodoCreateButton"
 
-import "./page.css";
+import "./todo.css";
 import TodoCreateModal from "@/components/Todo/TodoCreateModal";
 
 export default function TodoPage() {
@@ -35,7 +34,7 @@ export default function TodoPage() {
       <p style={{ display: items.length == 0 ? 'block' : 'none' }}>Click on the '+' button to create a new Todo Item.</p>
       <TodoList items={items} />
 
-      <TodoCreateModal onClose={handleCloseModal} onCreate={handleCreateTodo} visible={isModalVisible} />
+      <TodoCreateModal onClose={handleCloseModal} onCreate={handleCreateTodo} showing={isModalVisible} />
     </main >
   )
 }
