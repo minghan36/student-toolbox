@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap");
 
 /* Main calendar container with padding and positioning */
 .calendar_main {
@@ -89,6 +89,7 @@
   background-color: #999;
 }
 
+/* Button group container with flex layout */
 .buttonGroup {
   display: flex; /* Enable flexbox */
   align-items: center; /* Center vertically */
@@ -96,8 +97,10 @@
   gap: 10px; /* Add space between the buttons */
 }
 
-.uploadButton, .removeButton {
-  background-color: #4CAF50; /* Green */
+/* Style for the upload button */
+.uploadButton,
+.removeButton {
+  background-color: #4caf50; /* Green */
   border: none;
   color: white;
   padding: 10px 20px;
@@ -109,6 +112,7 @@
   border-radius: 4px;
 }
 
+/* Style for the remove button */
 .removeButton {
   width: 40px;
   height: 40px;
@@ -120,91 +124,8 @@
   background-color: #f44336; /* Red background */
 }
 
-.removeButton:hover, .uploadButton:hover {
+/* Hover state for the remove button */
+.removeButton:hover,
+.uploadButton:hover {
   opacity: 0.8; /* Add a hover effect to both buttons */
 }
-
-.fc {
-  font-family: 'Roboto', sans-serif;
-  color: #333;
-  background-color: #f7f7f7; /* Light background for the calendar */
-  border-radius: 8px; /* Round the corners of the calendar */
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
-  padding: 20px; /* Add padding around the calendar */
-}
-
-.fc-toolbar h2 {
-  font-weight: 700;
-  font-size: 1.8em; /* Larger title */
-  margin-bottom: 20px; /* Add space below the title */
-}
-
-.fc-daygrid-event, .fc-timegrid-event {
-  font-weight: 500;
-  font-size: 1em;
-  background-color: #4CAF50; /* Green background for events */
-  color: white; /* White text for events */
-  border: none;
-  border-radius: 4px; /* Round the corners of events */
-  padding: 5px; /* Add padding inside event blocks */
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Add subtle shadow to events */
-  transition: transform 0.2s; /* Smooth hover effect */
-}
-
-.fc-daygrid-event:hover, .fc-timegrid-event:hover {
-  transform: scale(1.05); /* Slightly enlarge on hover */
-}
-
-.fc .fc-button {
-  font-family: 'Roboto', sans-serif;
-  font-weight: 500;
-  background-color: #4CAF50; /* Green button background */
-  border: none;
-  color: white;
-  border-radius: 4px;
-  padding: 10px 20px;
-  margin-right: 10px;
-  cursor: pointer;
-  transition: background-color 0.2s; /* Smooth color change on hover */
-}
-
-.fc .fc-button:hover {
-  background-color: #45a049; /* Darker green on hover */
-}
-
-.fc-daygrid-day-number, .fc-timegrid-slot-label {
-  font-weight: 400;
-  font-size: 0.9em;
-  color: #555;
-}
-
-.fc .fc-header-toolbar {
-  margin-bottom: 20px;
-}
-
-.fc .fc-daygrid-day-frame {
-  padding: 10px; /* Add padding inside each day cell */
-  background-color: #fff; /* White background for day cells */
-  border-radius: 4px; /* Round the corners */
-  transition: background-color 0.2s; /* Smooth background change on hover */
-}
-
-.fc .fc-daygrid-day-frame:hover {
-  background-color: #f1f1f1; /* Light grey background on hover */
-}
-
-.fc-timegrid-slot-label {
-  color: #333; /* Darker color for time labels */
-  padding-left: 10px; /* Add padding to time labels */
-}
-
-.fc-timegrid-slot {
-  background-color: #fff; /* White background for time slots */
-  border-bottom: 1px solid #e0e0e0; /* Light grey border between time slots */
-}
-
-.fc-timegrid-axis {
-  background-color: #f9f9f9; /* Slightly darker background for time axis */
-  border-right: 1px solid #e0e0e0; /* Light grey border on the right of the time axis */
-}
-
