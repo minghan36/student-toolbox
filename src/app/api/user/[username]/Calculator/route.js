@@ -44,14 +44,14 @@ export async function POST(req, context) {
       if(type === "course"){
         user.courses.push(courseOrAssignment);
       } else if (type === "assignment"){
-        // Check if the course exists
+        // Check if the course exists to avoid false positives
         const courseExists = user.courses.some((course) => course.courseID === courseOrAssignment.courseID);
 
         if (!courseExists) {
           return NextResponse.json({ error: "Course not found" }, { status: 404 });
         }
 
-        // Push the assignment to the correct course
+        // Store the assignment in the correct course
         user.courses.forEach(course => {
           if(course.courseID === courseOrAssignment.courseID){
             course.assignments.push(courseOrAssignment);
@@ -88,11 +88,11 @@ export async function DELETE(req, context) {
     }
   
     try {
-        // Differentiate between deleting a course and assignment so they can be filtered from the correct array.
+        // Keep all courses and assignments apart from the targeted item.
         if(type === "course"){
             user.courses = user.courses.filter((course) => course.courseID !== deleteTarget.courseID);
         } else if (type === "assignment"){
-            // Find the user's course that contains the assignment and filter it out
+
             user.courses.forEach(course => {
                 if(course.courseID === deleteTarget.courseID){
                     course.assignments = course.assignments.filter((assignment) => assignment.assignmentID !== deleteTarget.assignmentID);
@@ -118,50 +118,63 @@ export async function DELETE(req, context) {
  */
 export async function PATCH(req, context) {
     const { username } = context.params;
-    const { type, updatedAssignmentOrCourse } = await req.json();
+    const { type, IDs, updatedFields } = await req.json();
   
     try {
       const UserModel = await createUserModel();
       const user = await UserModel.findOne({ username });
       
-      // Check if the desired fields exist in the database to be updated.
+
       if (!user) {
         return NextResponse.json({ error: "User not found" }, { status: 404 });
       }
   
-      const courseExists = user.courses.some((course) => course.courseID === updatedAssignmentOrCourse.courseID);
+      const courseExists = user.courses.some((course) => course.courseID === IDs.courseID);
       if (!courseExists) {
-        return NextResponse.json({ error: "Event not found" }, { status: 404 });
+        return NextResponse.json({ error: "Course not found" }, { status: 404 });
       }
   
+      // Only make changes to the specified type and field.
       if (type === "assignment"){
-        // Get the user's course that contains the assignment and update the assignment in the relevant assignment array.
+        // Check if the assignment exists to avoid false positives.
         user.courses.forEach(course => {
-          if(course.courseID === updatedAssignmentOrCourse.courseID){
-            const assignmentExists = course.some((assignment) => assignment.assignmentID === updatedAssignmentOrCourse.assignmentID);
+          if(course.courseID === IDs.courseID){
+            const assignmentExists = course.some((assignment) => assignment.assignmentID === IDs.assignmentID);
             if (!assignmentExists) {
-              return NextResponse.json({ error: "Event not found" }, { status: 404 });
+              return NextResponse.json({ error: "Assignment not found" }, { status: 404 });
             }
-            course.assignments = course.assignments.map((assignment) =>
-              assignment.assignmentID === updatedAssignmentOrCourse.assignmentID ? { ...assignment, ...updatedAssignmentOrCourse.content } : assignment
-            );
+            updateFieldsInList(course.assignments, IDs.assignmentID, updatedFields);
           }
         });
-
       } else if (type === "course"){
-        user.courses = user.courses.map((course) =>
-          course.courseID === updatedAssignmentOrCourse.courseID ? { ...course, ...updatedAssignmentOrCourse.content } : course
-        );
+        updateFieldsInList(user.courses, IDs.courseID, updatedFields);
       } else {
         return NextResponse.json({ error: "Invalid type" }, { status: 400 });
       }
   
-      // Save the user document
       await user.save();
   
-      return NextResponse.json(updatedEvent, { status: 200 });
+      return NextResponse.json(updatedFields, { status: 200 });
     } catch (error) {
       console.error("Error updating event:", error);
       return NextResponse.json({ error: error.message }, { status: 500 });
     }
+  }
+
+
+  /**
+   * Used to update some specific fields of a specific item in a list.
+   * 
+   * @param {list} list 
+   * @param {Number} id 
+   * @param {*} fieldValues 
+   */
+  function updateFieldInList(list, id, fieldValues) {
+    list.forEach((item) => {
+      if (item.id === id) {
+        for (const key in fieldValues) {
+          item[key] = fieldValues[key];
+        }
+      }
+    });
   }
