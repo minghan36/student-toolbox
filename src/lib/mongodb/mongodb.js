@@ -1,6 +1,5 @@
 import bcryptjs from "bcryptjs";
 import mongoose from "mongoose";
-import { number } from "prop-types";
 
 const connections = {};
 
@@ -33,18 +32,18 @@ const userSchema = new mongoose.Schema(
     ],
     courses: [
       {
-        courseName: String,
-        courseID: Number,
-        courseGradePoint: Number,
-        totalAchieved: Number,
-        averageAchieved: Number,
-        courseGrade: String,
+        courseName: { type: String, required: true },
+        id: { type: String, required: true },
+        gradePoint: { type: Number, default: null },
+        totalAchieved: { type: Number, default: 0 },
+        averageAchieved: { type: Number, default: 0 },
+        courseGrade: { type: String, default: "NA" },
         assignments: [
           {
-            assignmentID: Number,
-            assignmentName: String,
-            grade: Number,
-            weight: Number,
+            id: { type: String, required: true },
+            name: { type: String, default: "" },
+            grade: { type: String, default: "" },
+            weight: { type: String, default: "" },
           },
         ],
       },
