@@ -2,11 +2,11 @@
 
 import { React, useState } from "react"
 import Title from "@/components/title"
-import TodoList from "@/components/Todo/TodoList"
-import TodoCreateButton from "@/components/Todo/TodoCreateButton"
+import TodoList from "@/components/todo/TodoList"
+import TodoCreateButton from "@/components/todo/TodoCreateButton"
 
 import "./todo.css";
-import TodoCreateModal from "@/components/Todo/TodoCreateModal";
+import TodoCreateModal from "@/components/todo/TodoCreateModal";
 
 export default function TodoPage() {
   const [items, setItems] = useState([]);

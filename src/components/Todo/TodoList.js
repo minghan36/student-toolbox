@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import TodoListItem from "./TodoListItem";
 import PropTypes from "prop-types";
-import "./css/TodoList.css";
+import "./styles/todoList.css";
 
 export default function TodoList({ items }) {
     TodoList.propTypes = {

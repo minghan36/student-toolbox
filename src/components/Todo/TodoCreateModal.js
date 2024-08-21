@@ -1,5 +1,5 @@
 import { React, useState } from "react"
-import "./css/TodoCreateModal.css";
+import "./styles/todoCreateModal.css";
 
 import PropTypes from "prop-types";
 

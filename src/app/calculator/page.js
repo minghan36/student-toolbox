@@ -3,13 +3,13 @@ import CalculatorHeader from "@/components/calculator/header";
 import "./calculator.css";
 import CourseList from "@/components/calculator/courseList";
 import { useState, useEffect } from "react";
+import Title from "@/components/title"
 
 export default function CalculatorPage() {
   const crypto = window.crypto || window.msCrypto;
   let array = new Uint32Array(1);
 
   const [isInputNameEmpty, setIsInputNameEmpty] = useState(true);
-  // 'courses' array stores course objects (not course components).  Each course object contains the fields: 'id', 'courseName', and 'gradePoint'.
   const [courses, setCourses] = useState([]);
   const [courseName, setCourseName] = useState();
   const [gpa, setGpa] = useState("X");
@@ -23,7 +23,7 @@ export default function CalculatorPage() {
   const handleNewCourse = () => {
     setCourses([...courses, { id: crypto.getRandomValues(array), courseName }]);
     setCourseName("");
-    document.getElementById("courseInput").value = "";
+    document.getElementById("course-input").value = "";
     setIsInputNameEmpty(true);
   };
 
@@ -51,8 +51,6 @@ export default function CalculatorPage() {
    */
   useEffect(() => {
     let newGpa = 0;
-    // Since this hook is called whenever the 'courses' array changes, some courses in the array may not have a
-    // gradePoint. Count tracks the number of courses that do.
     let count = 0;
 
     for (let course in courses) {
@@ -71,21 +69,22 @@ export default function CalculatorPage() {
 
   return (
     <main>
-      <div className="gradeCalculator">
+      <div id="calculator-bar">
+        <Title text="GPA Calculator" />
         <CalculatorHeader
           onNewCourseInput={handleNewCourseInput}
           onNewCourse={handleNewCourse}
           input={isInputNameEmpty}
         ></CalculatorHeader>
-
-        <div className="overallGrade">Current GPA:{gpa}/9</div>
-
-        <CourseList
-          courses={courses}
-          onCourseDelete={handleCourseDelete}
-          onAverageUpdate={handleAverageUpdate}
-        ></CourseList>
       </div>
+
+      <div className="overall-grade">Current GPA:{gpa}/9</div>
+
+      <CourseList
+        courses={courses}
+        onCourseDelete={handleCourseDelete}
+        onAverageUpdate={handleAverageUpdate}
+      ></CourseList>
     </main>
   );
 }
