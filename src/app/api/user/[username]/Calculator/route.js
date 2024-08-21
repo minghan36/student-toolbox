@@ -29,7 +29,9 @@ export async function GET(req, context) {
  * @returns {NextResponse}
  */
 export async function POST(req, context) {
+    console.log("1");
     const username = context.params.username;
+    console.log(username);
     const UserModel = await createUserModel();
     const { type, courseID, courseOrAssignment } = await req.json();
     const user = await UserModel.findOne({ username });
