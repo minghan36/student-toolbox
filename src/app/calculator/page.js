@@ -1,10 +1,11 @@
 "use client";
-import CalculatorHeader from "@/components/calculator/header";
-import "./calculator.css";
 import CourseList from "@/components/calculator/courseList";
-import { useState, useEffect } from "react";
-import { useSession } from "next-auth/react";
+import CalculatorHeader from "@/components/calculator/header";
+import Title from "@/components/title";
 import { nanoid } from "nanoid";
+import { useSession } from "next-auth/react";
+import { useEffect, useState } from "react";
+import "./calculator.css";
 
 export default function CalculatorPage() {
   const session = useSession();
@@ -18,8 +19,8 @@ export default function CalculatorPage() {
   /**
    * Fetch the courses associated with the user to load their saved data.
    * Will update the courses list everytime a new user is loaded.
-   * 
-   * @param {String} username 
+   *
+   * @param {String} username
    */
   useEffect(() => {
     if (username) {
@@ -35,7 +36,6 @@ export default function CalculatorPage() {
     } else console.log("No username provided yet");
   }, [username]);
 
-
   const handleNewCourseInput = (event) => {
     const inputValue = event.target.value;
     setIsInputNameEmpty(inputValue.trim() === "");
@@ -46,7 +46,15 @@ export default function CalculatorPage() {
    * Create a new course only if it can be successfuly saved to the database
    */
   const handleNewCourse = async () => {
-    const newCourse = { id: nanoid(), courseName, gradePoint: null, totalAchieved: 0, averageAchieved: 0, courseGrade: "NA", assignments: [] };
+    const newCourse = {
+      id: nanoid(),
+      courseName,
+      gradePoint: null,
+      totalAchieved: 0,
+      averageAchieved: 0,
+      courseGrade: "NA",
+      assignments: [],
+    };
     const response = await fetch(`/api/user/${username}/calculator`, {
       method: "POST",
       headers: {
@@ -55,7 +63,7 @@ export default function CalculatorPage() {
       body: JSON.stringify({
         type: "course",
         courseID: newCourse.id,
-        courseOrAssignment: newCourse 
+        courseOrAssignment: newCourse,
       }),
     });
 
@@ -63,16 +71,15 @@ export default function CalculatorPage() {
       setCourses([...courses, newCourse]);
       setCourseName("");
       document.getElementById("courseInput").value = "";
-      setIsInputNameEmpty(true)
+      setIsInputNameEmpty(true);
     } else {
       alert("Failed to create course");
     }
   };
 
-
   /**
    * Removes a course with the specified id only if it is successfully deleted from the database.
-   * @param {Number} id 
+   * @param {Number} id
    */
   const handleCourseDelete = async (id) => {
     const response = await fetch(`/api/user/${username}/calculator`, {
@@ -80,12 +87,12 @@ export default function CalculatorPage() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ 
+      body: JSON.stringify({
         type: "course",
         deleteTarget: {
-          courseID: id
-        }
-       }),
+          courseID: id,
+        },
+      }),
     });
 
     if (response.ok) {
@@ -154,17 +161,7 @@ export default function CalculatorPage() {
         <CalculatorHeader
           onNewCourseInput={handleNewCourseInput}
           onNewCourse={handleNewCourse}
-          input={isInputNameEmpty}
-        ></CalculatorHeader>
-
-        <div className="overallGrade">Current GPA:{gpa}/9</div>
-
-        <CourseList
-          courses={courses}
-          username = {username}
-          onCourseDelete={handleCourseDelete}
-          onAverageUpdate={handleAverageUpdate}
-        ></CourseList>
+          input={isInputNameEmpty}></CalculatorHeader>
       </div>
 
       <div className="overall-grade">Current GPA:{gpa}/9</div>
@@ -172,8 +169,7 @@ export default function CalculatorPage() {
       <CourseList
         courses={courses}
         onCourseDelete={handleCourseDelete}
-        onAverageUpdate={handleAverageUpdate}
-      ></CourseList>
+        onAverageUpdate={handleAverageUpdate}></CourseList>
     </main>
   );
 }
