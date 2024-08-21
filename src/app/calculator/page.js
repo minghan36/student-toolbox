@@ -4,16 +4,15 @@ import CalculatorHeader from "@/components/calculator/header";
 import Title from "@/components/title";
 import { nanoid } from "nanoid";
 import { useSession } from "next-auth/react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./calculator.css";
 
 export default function CalculatorPage() {
   const session = useSession();
   const username = session?.data?.user?.name;
 
-  const [isInputNameEmpty, setIsInputNameEmpty] = useState(true);
   const [courses, setCourses] = useState([]);
-  const [courseName, setCourseName] = useState();
+  const [courseName, setCourseName] = useState("");
   const [gpa, setGpa] = useState("X");
 
   /**
@@ -37,9 +36,7 @@ export default function CalculatorPage() {
   }, [username]);
 
   const handleNewCourseInput = (event) => {
-    const inputValue = event.target.value;
-    setIsInputNameEmpty(inputValue.trim() === "");
-    setCourseName(inputValue);
+    setCourseName(event.target.value);
   };
 
   /**
@@ -70,8 +67,6 @@ export default function CalculatorPage() {
     if (response.ok) {
       setCourses([...courses, newCourse]);
       setCourseName("");
-      document.getElementById("courseInput").value = "";
-      setIsInputNameEmpty(true);
     } else {
       alert("Failed to create course");
     }
@@ -161,7 +156,7 @@ export default function CalculatorPage() {
         <CalculatorHeader
           onNewCourseInput={handleNewCourseInput}
           onNewCourse={handleNewCourse}
-          input={isInputNameEmpty}></CalculatorHeader>
+          courseName={courseName}></CalculatorHeader>
       </div>
 
       <div className="overall-grade">Current GPA:{gpa}/9</div>
