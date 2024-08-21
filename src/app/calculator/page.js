@@ -156,15 +156,18 @@ export default function CalculatorPage() {
         <CalculatorHeader
           onNewCourseInput={handleNewCourseInput}
           onNewCourse={handleNewCourse}
-          courseName={courseName}></CalculatorHeader>
+          courseName={courseName}
+        ></CalculatorHeader>
       </div>
 
       <div className="overall-grade">Current GPA:{gpa}/9</div>
 
       <CourseList
         courses={courses}
+        username={username}
         onCourseDelete={handleCourseDelete}
-        onAverageUpdate={handleAverageUpdate}></CourseList>
+        onAverageUpdate={handleAverageUpdate}
+      ></CourseList>
     </main>
   );
 }

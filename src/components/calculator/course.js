@@ -7,29 +7,31 @@ import { nanoid } from "nanoid";
 
 /**
  * Course component represents a single course in the application. It displays the course's name,
- * a list of assignments, and calculated totals such as total achieved percentage, average achieved 
+ * a list of assignments, and calculated totals such as total achieved percentage, average achieved
  * percentage, and the course grade.
- * 
+ *
  * State:
  * - `showAssignments` (Boolean): Determines whether the assignments for the course are visible.
  * - `totalAchieved` (Number): The total percentage achieved for the course.
  * - `averageAcheived` (Number): The average percentage achieved for the course.
  * - `courseGrade` (String): The grade of the course, default is "NA".
  * - `assignments` (Array): Array of assignment objects associated with the course. Each assignment contains an 'id' field.
- * @param {*} props 
- * @returns 
+ * @param {*} props
+ * @returns
  */
 export default function Course(props) {
   const [showAssignments, setShowAssignments] = useState(false);
   const [totalAchieved, setTotalAchieved] = useState(props.totalAchieved || 0);
-  const [averageAcheived, setAverageAcheived] = useState(props.averageAchieved || 0);
+  const [averageAcheived, setAverageAcheived] = useState(
+    props.averageAchieved || 0
+  );
   const [courseGrade, setCourseGrade] = useState(props.courseGrade || "NA");
   const [assignments, setAssignments] = useState(props.assignments || []);
 
   let totalPercent;
 
   /**
-   * Try to add a new assignment for the current course in the database. 
+   * Try to add a new assignment for the current course in the database.
    * If successful, add the new assignment to the list of assignments.
    */
   const handleNewAssignment = async () => {
@@ -55,7 +57,7 @@ export default function Course(props) {
 
   /**
    * Attempt to remove the specified assignment from the database. If successful, remove from the local list.
-   * @param {*} id 
+   * @param {*} id
    */
   const handleAssignmentDelete = async (id) => {
     const response = await fetch(`/api/user/${props.username}/calculator`, {
@@ -68,7 +70,7 @@ export default function Course(props) {
         deleteTarget: {
           courseID: props.id,
           assignmentID: id,
-        }
+        },
       }),
     });
 
@@ -115,7 +117,7 @@ export default function Course(props) {
           totalAchieved: newTotal,
           averageAchieved: newAverage,
           courseGrade: newGrade.letter,
-        }
+        },
       }),
     });
     console.log(response.ok);
@@ -163,8 +165,8 @@ export default function Course(props) {
 
   /**
    * Used to find the letter grade and GPA so we can update the relevant fields accordingly.
-   * @param {Number} average 
-   * @returns 
+   * @param {Number} average
+   * @returns
    */
   const determineGrade = (average) => {
     if (average >= 90) return { letter: "A+", gpa: 9 };
@@ -184,7 +186,7 @@ export default function Course(props) {
 
   /**
    * Calculates the course grade based on the average achieved percentage
-   * and updates the grade. Also updates the GPA in ../page.js. 
+   * and updates the grade. Also updates the GPA in ../page.js.
    */
   useEffect(() => {
     const grade = determineGrade(averageAcheived);
@@ -203,13 +205,19 @@ export default function Course(props) {
         averageAcheived={averageAcheived}
         courseGrade={courseGrade}
       ></CourseHeader>
-      <div className={showAssignments ? "course-assignments-show" : "course-assignments-hide"}>
+      <div
+        className={
+          showAssignments
+            ? "course-assignments-show"
+            : "course-assignments-hide"
+        }
+      >
         {assignments.map((assignment) => (
           <Assignment
             key={assignment.id}
             id={assignment.id}
             courseID={props.id}
-            username = {props.username}
+            username={props.username}
             name={assignment.name}
             grade={assignment.grade}
             weight={assignment.weight}
@@ -217,9 +225,7 @@ export default function Course(props) {
             onUpdate={handleAssignmentUpdate}
           />
         ))}
-        <button onClick={handleNewAssignment}>
-          New Assignment +
-        </button>
+        <button onClick={handleNewAssignment}>New Assignment +</button>
       </div>
     </div>
   );
@@ -234,11 +240,12 @@ Course.propTypes = {
       id: PropTypes.any.isRequired,
       name: PropTypes.string,
       grade: PropTypes.string,
-      weight: PropTypes.string
-    })),
+      weight: PropTypes.string,
+    })
+  ),
   courseName: PropTypes.string.isRequired,
   username: PropTypes.string.isRequired,
   courseDelete: PropTypes.func.isRequired,
   id: PropTypes.isRequired,
-  onAverageUpdate: PropTypes.func.isRequired
+  onAverageUpdate: PropTypes.func.isRequired,
 };
