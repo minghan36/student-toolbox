@@ -38,7 +38,6 @@ textarea {
     margin-top: 0.5rem;
     padding: 0.5rem;
     font-weight: 400;
-    font-family: inherit;
     font-size: 1rem;
 }
 
@@ -49,7 +48,7 @@ textarea {
 }
 
 #todo-create-modal-create-button {
-    background-color: #8DDBE0;
+    background-color: var(--primary-color);
 }
 
 #todo-create-modal-form {

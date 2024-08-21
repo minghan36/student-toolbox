@@ -2,7 +2,7 @@
 
 import PropTypes from "prop-types"
 import Blockies from "react-blockies"
-import styles from "./auth.module.scss"
+import "./styles/avatar.css"
 
 Avatar.propTypes = {
   size: PropTypes.number.isRequired,

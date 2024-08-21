@@ -13,7 +13,7 @@ describe("calculateTotalPercent", () => {
     ];
 
     const result = calculateTotalPercent(assignments);
-    expect(result).toBe(80); // (0.3*90) + (0.4*80) + (0.3*70) = 77.0
+    expect(result).toBe(80);
   });
 
   it("should return 0 if no valid weights or grades are provided", () => {
@@ -33,7 +33,8 @@ describe("calculateAveragePercent", () => {
     const totalPercent = calculateTotalPercent(assignments);
     const result = calculateAveragePercent(assignments, totalPercent);
 
-    expect(result).toBe(63.3); // Average percent is equal to totalPercent when weights sum up to 100%
+    // The average percent is equal to `totalPercent` when weights sum up to 100%
+    expect(result).toBe(63.3);
   });
 
   it("should return 0 if no valid assignments are provided", () => {
@@ -51,7 +52,7 @@ describe("calculateGPA", () => {
       { averageAchieved: 7 },
     ];
     const result = calculateGPA(courses);
-    expect(result).toBe("8.00"); // (9 + 8 + 7) / 3 = 8.00
+    expect(result).toBe("8.00");
   });
 
   it('should return "X" if no valid GPA is present', () => {
@@ -67,7 +68,7 @@ describe("calculateGPA", () => {
       { averageAchieved: 7 },
     ];
     const result = calculateGPA(courses);
-    expect(result).toBe("8.00"); // (9 + 7) / 2 = 8.00
+    expect(result).toBe("8.00");
   });
 
   it("should handle an empty courses array", () => {

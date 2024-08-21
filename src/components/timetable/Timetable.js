@@ -5,9 +5,9 @@ import PropTypes from "prop-types";
 import FullCalendar from "@fullcalendar/react";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
-import styles from "./style.module.scss";
-import EventModal from "./eventModal";
-import DeleteModal from "./deleteModal";
+import "./styles/timetable.css";
+import TimetableEventModal from "./TimetableEventModal";
+import TimetableDeleteModal from "./TimetableDeleteModal";
 
 /**
  * Calendar component for displaying and managing events.
@@ -16,8 +16,7 @@ import DeleteModal from "./deleteModal";
  * @param {string} props.username - The username of the user whose events are displayed.
  * @returns {JSX.Element} The rendered component.
  */
-export default function Calendar({ username }) {
-  // State variables for managing modals and events
+export default function Timetable({ username }) {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [deleteModalIsOpen, setDeleteModalIsOpen] = useState(false);
   const [events, setEvents] = useState([]);
@@ -82,7 +81,6 @@ export default function Calendar({ username }) {
       borderColor: eventInfo.event.borderColor,
     };
 
-    // Send a PATCH request to update the event
     const response = await fetch(`/api/user/${username}/event`, {
       method: "PATCH",
       body: JSON.stringify({
@@ -101,51 +99,9 @@ export default function Calendar({ username }) {
     }
   };
 
-  const handleBackgroundImageUpload = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setBackgroundImage(reader.result);
-        document.body.style.backgroundImage = `url(${reader.result})`;
-        document.body.style.backgroundSize = "cover";
-        document.body.style.backgroundRepeat = "no-repeat";
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-
-  const handleRemoveBackgroundImage = () => {
-    setBackgroundImage(null); // Clear the backgroundImage state
-    document.body.style.backgroundImage = ""; // Remove the background image
-  };
-
   return (
-    <div className={styles.calendar_main}>
-      {/* Button group for uploading and removing background image */}
-      <div className={styles.buttonGroup}>
-        <input
-          type="file"
-          accept="image/*"
-          onChange={handleBackgroundImageUpload}
-          style={{ display: "none" }}
-          id="backgroundImageUpload"
-        />
-        <label htmlFor="backgroundImageUpload" className={styles.uploadButton}>
-          Upload Background Image
-        </label>
+    <div className={"calendar-main"}>
 
-        {backgroundImage && (
-          <button
-            onClick={handleRemoveBackgroundImage}
-            className={styles.removeButton}
-          >
-            &times;
-          </button>
-        )}
-      </div>
-
-      {/* Render the FullCalendar component with the necessary plugins */}
       <FullCalendar
         plugins={[timeGridPlugin, interactionPlugin]}
         initialView="timeGridWeek"
@@ -165,9 +121,8 @@ export default function Calendar({ username }) {
         height={700}
       />
 
-      {/* Render EventModal if the modalIsOpen state is true */}
       {modalIsOpen && (
-        <EventModal
+        <TimetableEventModal
           isOpen={modalIsOpen}
           setIsOpen={setModalIsOpen}
           selectedInfo={selectedInfo}
@@ -175,9 +130,8 @@ export default function Calendar({ username }) {
         />
       )}
 
-      {/* Render DeleteModal if the deleteModalIsOpen state is true */}
       {deleteModalIsOpen && (
-        <DeleteModal
+        <TimetableDeleteModal
           isOpen={deleteModalIsOpen}
           setIsOpen={setDeleteModalIsOpen}
           selectedEvent={selectedEvent}
@@ -188,7 +142,6 @@ export default function Calendar({ username }) {
   );
 }
 
-// Define propTypes for the component
-Calendar.propTypes = {
+Timetable.propTypes = {
   username: PropTypes.string.isRequired,
 };

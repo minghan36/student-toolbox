@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import styles from "./style.module.scss";
+import "./styles/timetable.css";
 import { useSession } from "next-auth/react";
 
 /**
@@ -13,7 +13,7 @@ import { useSession } from "next-auth/react";
  * @param {Function} props.setEvents - Function to update the events list after deletion.
  * @returns {JSX.Element|null} The rendered component or null if the modal is not open.
  */
-export default function DeleteModal({
+export default function TimetableDeleteModal({
   isOpen,
   setIsOpen,
   selectedEvent,
@@ -30,7 +30,6 @@ export default function DeleteModal({
    * @returns {Promise<void>}
    */
   const handleEventDeletion = async () => {
-    // If an event is selected, send a DELETE request to remove it
     if (selectedEvent) {
       const response = await fetch(`/api/user/${username}/event`, {
         method: "DELETE",
@@ -41,7 +40,6 @@ export default function DeleteModal({
       });
 
       if (response.ok) {
-        // Remove the deleted event from the events list
         setEvents((prevEvents) =>
           prevEvents.filter((event) => event.id !== selectedEvent.id)
         );
@@ -54,8 +52,8 @@ export default function DeleteModal({
 
   return (
     isOpen && (
-      <div className={styles.modalOverlay}>
-        <div className={styles.modalContent}>
+      <div className="modal-overlay">
+        <div className="modal-content">
           <h2>Delete Event</h2>
           <p>
             Are you sure you want to delete the event '{selectedEvent?.title}'?
@@ -68,15 +66,13 @@ export default function DeleteModal({
   );
 }
 
-// Define PropTypes for DeleteModal to enforce the types of props passed
-DeleteModal.propTypes = {
+TimetableDeleteModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   setIsOpen: PropTypes.func.isRequired,
   selectedEvent: PropTypes.object,
   setEvents: PropTypes.func.isRequired,
 };
 
-// Define default props if necessary
-DeleteModal.defaultProps = {
+TimetableDeleteModal.defaultProps = {
   selectedEvent: null,
 };

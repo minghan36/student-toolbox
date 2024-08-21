@@ -14,7 +14,7 @@
     font-size: 17px;
 }
 
-.assignment > div {
+.assignment>div {
     cursor: default;
     width: 49%;
     height: 100%;
@@ -22,7 +22,7 @@
     align-items: center;
 }
 
-.assignmentName {
+.assignment-name {
     display: flex;
     align-items: center;
     height: 50%;
@@ -32,7 +32,7 @@
     border-radius: 5px;
 }
 
-.assignmentName > button {
+.assignment-name>button {
     cursor: text;
     display: flex;
     align-items: center;
@@ -44,7 +44,7 @@
     border: none;
 }
 
-.assignmentName > button > * {
+.assignment-name>button>* {
     width: 100%;
     font-size: 18px;
     background-color: transparent;
@@ -52,7 +52,7 @@
     border: none;
 }
 
-.assignmentResults > div {
+.assignment-results>div {
     display: flex;
     width: 40%;
     margin: 5px;
@@ -63,7 +63,7 @@
     border-radius: 5px;
 }
 
-.assignmentResults > div > button {
+.assignment-results>div>button {
     cursor: text;
     display: flex;
     align-items: center;
@@ -74,7 +74,7 @@
     border: none;
 }
 
-#finalGrade {
+#final-grade {
     width: 50%;
 }
 
@@ -82,7 +82,7 @@
     width: 45%;
 }
 
-.assignmentResults > div > button > * {
+.assignment-results>div>button>* {
     width: 100%;
     font-size: 18px;
     background-color: transparent;
@@ -90,15 +90,13 @@
     border: none;
 }
 
-.assignmentResults > button{
-
-    background: none;       
-    border: none;           
-    color: inherit;      
-    cursor: pointer;  
+.assignment-results>button {
+    background: none;
+    border: none;
+    color: inherit;
+    cursor: pointer;
     width: 12%;
     font-size: 18px;
     text-align: center;
     align-items: center;
-    
 }

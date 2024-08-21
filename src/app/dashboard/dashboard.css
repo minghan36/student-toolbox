@@ -1,0 +1,12 @@
+.avatar {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+}
+
+.dashboard {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;  
+  margin-top: 20vh;
+}

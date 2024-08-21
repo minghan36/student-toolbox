@@ -1,5 +1,18 @@
+:root {
+    --background: #E5ECED;
+    --primary-color: #8DDBE0;
+    --secondary-color: #9bc4bc;
+}
+
 body {
     font-family: 'Poppins', sans-serif, 'Verdana', 'Arial';
+    background-color: var(--background);
+
+    margin: 0 20% 0 20%;
+}
+
+input {
+    font-family: inherit;
 }
 
 button {
@@ -18,4 +31,10 @@ button:hover {
     cursor: pointer;
     scale: 1.05;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.avatar {
+    position: absolute;
+    top: 24px;
+    right: 24px;
 }

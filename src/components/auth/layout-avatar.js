@@ -1,5 +1,5 @@
 import { auth } from "@/auth"
-import styles from "./auth.module.scss"
+import "./styles/avatar.css"
 import Avatar from "./avatar"
 
 export default async function LayoutAvatar() {
@@ -8,7 +8,7 @@ export default async function LayoutAvatar() {
   if (!session?.user?.name) return null
 
   return (
-    <div className={styles["layout-avatar"]}>
+    <div className="layout-avatar">
       <Avatar size={48} username={session} />
     </div>
   )
