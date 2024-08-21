@@ -32,9 +32,6 @@ export async function POST(req, context) {
     const username = context.params.username;
     const UserModel = await createUserModel();
     const { type, courseID, courseOrAssignment } = await req.json();
-    console.log(type);
-    console.log(courseID);
-    console.log(courseOrAssignment);
     const user = await UserModel.findOne({ username });
 
     if (!user) {
@@ -174,9 +171,6 @@ export async function PATCH(req, context) {
     list.forEach((item) => {
       if (item.id === id) {
         for (const key in fieldValues) {
-          console.log(key);
-          console.log(fieldValues[key]);
-          console.log(item[key]);
           item[key] = fieldValues[key];
         }
       }
