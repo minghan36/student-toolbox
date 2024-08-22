@@ -5,7 +5,7 @@ export default function CourseHeader({
   onClick,
   onDelete,
   totalAchieved,
-  averageAchieved,
+  averageAcheived,
   courseGrade,
 }) {
   return (
@@ -16,7 +16,7 @@ export default function CourseHeader({
       </div>
       <div className="grade-summary">
         <div className="total-grade">Total %: {totalAchieved}%</div>
-        <div className="average-grade">Average %: {averageAchieved}%</div>
+        <div className="average-grade">Average %: {averageAcheived}%</div>
         <button className="delete-course-btn" onClick={() => onDelete()}>
           x
         </button>
@@ -30,6 +30,6 @@ CourseHeader.propTypes = {
   onDelete: PropTypes.func.isRequired,
   onClick: PropTypes.func.isRequired,
   totalAchieved: PropTypes.number.isRequired,
-  averageAchieved: PropTypes.number.isRequired,
+  averageAcheived: PropTypes.number.isRequired,
   courseGrade: PropTypes.string.isRequired,
 };
