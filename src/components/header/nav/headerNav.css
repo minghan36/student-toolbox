@@ -3,14 +3,15 @@
   position: fixed;
   left: 0;
   height: 100vh;
-  background-color: rgb(208, 236, 255);
+  background-color: #adc1c6;
   color: white;
   z-index: 9;
+  top: 0px;
 }
 
 /* Navigation panel content styles */
 .menu .body {
-  padding: 100px;
+  padding: 50px;
   display: flex;
   justify-content: space-between;
 }
@@ -22,15 +23,6 @@
   font-size: 56px;
   gap: 12px;
   margin-top: 80px;
-}
-
-/* Header styles */
-.menu .body .nav .header {
-  color: rgb(153, 153, 153);
-  border-bottom: 1px solid rgb(153, 153, 153);
-  text-transform: uppercase;
-  font-size: 11px;
-  margin-bottom: 40px;
 }
 
 .menu .body .nav a {

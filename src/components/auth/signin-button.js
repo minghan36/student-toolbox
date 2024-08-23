@@ -1,11 +1,16 @@
-"use client"
+"use client";
 
-import { signIn } from "next-auth/react"
+import { signIn } from "next-auth/react";
+import "./styles/button.css";
 
 export default function SignInButton() {
   async function handleSignIn() {
-    await signIn()
+    await signIn();
   }
 
-  return <button onClick={handleSignIn}>Sign in</button>
+  return (
+    <button className={"sign-button"} onClick={handleSignIn}>
+      Sign in
+    </button>
+  );
 }

@@ -30,6 +30,32 @@ const userSchema = new mongoose.Schema(
         borderColor: { type: String, default: "#3788d8" },
       },
     ],
+    courses: [
+      {
+        courseName: { type: String, required: true },
+        id: { type: String, required: true },
+        gradePoint: { type: Number, default: null },
+        totalAchieved: { type: Number, default: 0 },
+        averageAchieved: { type: Number, default: 0 },
+        courseGrade: { type: String, default: "NA" },
+        assignments: [
+          {
+            id: { type: String, required: true },
+            name: { type: String, default: "" },
+            grade: { type: String, default: "" },
+            weight: { type: String, default: "" },
+          },
+        ],
+      },
+    ],
+    todos: [
+      {
+        id: { type: Number, required: true },
+        title: { type: String, required: true },
+        description: { type: String, required: true },
+        completed: { type: Boolean, required: true },
+      },
+    ],
   },
   {
     methods: {

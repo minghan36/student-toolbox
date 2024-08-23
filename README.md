@@ -1,5 +1,7 @@
 # 📚 Student Toolbox 🧰
 
+## v1.20.4
+
 Student Toolbox is a web application designed to make student life easier by organizing their schedule, calculating their grades, and managing the tasks that they need to complete.
 
 ## Getting Started 🚀
@@ -105,12 +107,26 @@ We use [Auth.js](https://authjs.dev/) to provide authentication and session mana
 
 ## Contributing
 
-Please read (insert contributor guidelines) for details on contributing and (insert code of conduct) for expected behaviour.
+Please read the [contributor guidelines](https://github.com/Snacc-Overflow/student-toolbox/blob/main/CONTRIBUTING.md) for details on contributing and the [code of conduct](https://github.com/Snacc-Overflow/student-toolbox/blob/main/CODE_OF_CONDUCT.md) for expected behaviour.
+
+## Helpful documentation
+
+- [Full calender](https://fullcalendar.io/) (Official documentation of the calender component used in the time table page)
 
 ## Versioning
 
-We use Git for version control.
+Versioning system: [Semantic versioning](https://semver.org/)
+Version control: [Git](https://git-scm.com/)
 
 ## Authors
 
+- [Aaron Worsnop](https://github.com/aaronworsnop)
+- [Chris Kwon](https://github.com/hyukjun3)
+- [Huaiwen Zhang](https://github.com/Deagle0422)
+- [Ming Huang](https://github.com/minghan36)
+- [Troy Mackenzie-Smee](https://github.com/tmacsmee)
+- [Venxia Niu](https://github.com/vniu740)
+
 ## License
+
+[MIT License](https://github.com/Snacc-Overflow/student-toolbox/blob/main/LICENSE)

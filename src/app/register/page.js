@@ -1,17 +1,17 @@
-import Title from "@/components/title"
-import { createUserModel } from "@/lib/mongodb/mongodb"
+import Title from "@/components/title";
+import { createUserModel } from "@/lib/mongodb/mongodb";
 
 export default async function RegisterPage() {
   async function registerUser(formData) {
-    "use server"
+    "use server";
 
-    const username = formData.get("username")
-    const password = formData.get("password")
+    const username = formData.get("username");
+    const password = formData.get("password");
 
-    const User = await createUserModel()
-    const user = new User({ username: username, password: password })
+    const User = await createUserModel();
+    const user = new User({ username: username, password: password });
 
-    await user.save()
+    await user.save();
   }
 
   return (
@@ -27,5 +27,5 @@ export default async function RegisterPage() {
         <button type="submit">Register</button>
       </form>
     </main>
-  )
+  );
 }

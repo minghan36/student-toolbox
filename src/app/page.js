@@ -1,21 +1,20 @@
-import { auth } from "@/auth"
-import Title from "@/components/title"
-import './dashboard/dashboard.css'
 import DashboardItem from "@/components/dashboard/dashboardItem";
+import Welcome from "@/components/dashboard/welcome";
+import "./dashboard/dashboard.css";
 
 export default async function Home() {
-  const session = await auth()
   const dashboardItems = [
-    { title: 'To-Do List', icon: '/icons/todolist.png', link: '/todo' },
-    { title: 'Timetable', icon: '/icons/timetable.png', link: '/timetable' },
-    { title: 'GPA Calculator', icon: '/icons/calculator.png', link: '/calculator' },
+    { title: "To-Do List", icon: "/icons/todolist.png", link: "/todo" },
+    { title: "Timetable", icon: "/icons/timetable.png", link: "/timetable" },
+    {
+      title: "GPA Calculator",
+      icon: "/icons/calculator.png",
+      link: "/calculator",
+    },
   ];
-
   return (
     <main>
-      <Title
-        text={`👋 Welcome, ${session ? session?.user?.name : "student"}!`}
-      />
+      <Welcome />
       <div className="dashboard">
         {dashboardItems.map((item, index) => (
           <DashboardItem
@@ -27,5 +26,5 @@ export default async function Home() {
         ))}
       </div>
     </main>
-  )
+  );
 }

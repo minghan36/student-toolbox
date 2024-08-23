@@ -5,7 +5,7 @@
   margin: 20px;
   width: 80px;
   height: 80px;
-  background-color: lightblue;
+  background-color: #92bfc5;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -13,6 +13,7 @@
   border: none;
   cursor: pointer;
   z-index: 10;
+  top: 0;
 }
 
 /* Burger icon within button */

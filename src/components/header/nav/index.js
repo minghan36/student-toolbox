@@ -26,9 +26,6 @@ export default function Index() {
     >
       <div className="body">
         <div className="nav">
-          <div className="header">
-            <p>Put search bar here</p>
-          </div>
           {navItems.map((item, index) => (
             <Link key={item.href} data={{ ...item, index }} />
           ))}

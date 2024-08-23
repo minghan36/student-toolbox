@@ -40,6 +40,34 @@ We use GitHub issues to track proposed features. Propose a feature by [opening a
 
 We use GitHub issues to track public bugs. Report a bug by [opening a new issue](https://github.com/Snacc-Overflow/student-toolbox/issues/new/choose) and choosing the Bugs template—it's that easy!
 
+## 🪭 Our Custom Labels
+
+- **backend**  🔙
+  - Purpose: Indicates that the issue or pull request involves backend development, such as server-side logic, database interactions, or APIs.  
+  - Example: 
+    - Issue: _"Create RESTful API for user authentication."_  
+
+- **design** 🎨
+  - Purpose: Marks issues or pull requests focused on the design elements that are not directly functional, such as wireframes, UI mockups, or architectural diagrams.
+  - Example:
+    - Issue: _"Update wireframes to reflect new navigation flow."_  
+
+- **feature** 🐥
+  - Purpose: Used for issues or pull requests that involve the development or modification of features or components in the application.  
+    - Example:  
+      - Issues _"Add search functionality to the dashboard."_  
+
+- **front end** 🙇‍♀️
+  - Purpose: Specifies that the issue or pull request deals with frontend development, such as UI implementation, styling, or client-side logic.  
+  - Example: 
+    - Issue: _"Fix button alignment on the settings page."_  
+
+- **wontfix** 🙈
+  - Purpose: Applied to issues or pull requests that, after review, are determined not to be addressed or implemented.  
+  - Example: 
+    - Issue: _"Add support for outdated browser versions."_  
+
+
 ## 📜 License
 
 By contributing, you agree that your contributions will be licensed under its MIT License.
